@@ -178,6 +178,13 @@ const options: RenovateOptions[] = [
     type: 'boolean',
     default: false,
   },
+  {
+    name: 'dockerUser',
+    description:
+      'Specify UID and GID for docker-based binaries when binarySource=docker is used.',
+    admin: true,
+    type: 'string',
+  },
   // Log options
   {
     name: 'logLevel',
@@ -1453,6 +1460,7 @@ const options: RenovateOptions[] = [
       commitMessageTopic: 'Rust crate {{depName}}',
       managerBranchPrefix: 'rust-',
       fileMatch: ['(^|/)Cargo.toml$'],
+      versionScheme: 'cargo',
     },
     mergeable: true,
   },
@@ -1935,6 +1943,15 @@ const options: RenovateOptions[] = [
     env: false,
   },
   {
+    name: 'insecureRegistry',
+    description: 'explicity turn on insecure docker registry access (http)',
+    type: 'boolean',
+    stage: 'repository',
+    parent: 'hostRules',
+    cli: false,
+    env: false,
+  },
+  {
     name: 'prBodyDefinitions',
     description: 'Table column definitions for use in PR tables',
     type: 'object',
@@ -2009,6 +2026,12 @@ const options: RenovateOptions[] = [
   {
     name: 'unicodeEmoji',
     description: 'Enable or disable Unicode emoji',
+    type: 'boolean',
+    default: false,
+  },
+  {
+    name: 'gitLabAutomerge',
+    description: `Enable or disable usage of GitLab's "merge when pipeline succeeds" feature when automerging PRs`,
     type: 'boolean',
     default: false,
   },
