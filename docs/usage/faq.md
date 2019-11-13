@@ -9,9 +9,10 @@ description: Frequently Asked Questions for Renovate Configuration
 
 Renovate will:
 
-- Look for configuration options in a configuration file (e.g. `renovate.json`) and in each
-  `package.json` file
-- Find and process all package files (e.g. `package.json`, `package.js`, `Dockerfile`, etc) in each repository
+- Look for configuration options in a configuration file (e.g. `renovate.json`)
+  and in each `package.json` file
+- Find and process all package files (e.g. `package.json`, `package.js`,
+  `Dockerfile`, etc) in each repository
 - Use separate branches/PR for each dependency
 - Use separate branches for each _major_ version of each dependency
 - Pin devDependencies to a single version, rather than use ranges
@@ -97,13 +98,15 @@ present. Multiple entries in the array means "or".
 You could:
 
 - Use `ignorePaths` to ignore certain paths in the repository, or
-- Explicitly list every package file you want renovated, in the `packageFiles` configuration object, or
+- Explicitly list every package file you want renovated, in the `packageFiles`
+  configuration object, or
 - Add a `renovate` section to any `package.json` files you don't want renovated,
   with the configuration option `"enabled": false`
 
 ### Disable renovate for certain dependency types
 
-Define a packageRules entry which has the dependency type(s) in `depTypeList` and `"enabled": false`.
+Define a packageRules entry which has the dependency type(s) in `depTypeList`
+and `"enabled": false`.
 
 ### Use a single branch/PR for all dependency upgrades
 
@@ -120,12 +123,14 @@ Set configuration option `rangeStrategy` to `"replace"`.
 
 ### Keep lock files (including sub-dependencies) up-to-date, even when `package.json` hasn't changed
 
-This is enabled by default, but its schedule is set to `["before 5am on monday"]`. If you want it more frequently, then update the `schedule` field
-inside the `lockFileMaintenance` object.
+This is enabled by default, but its schedule is set to
+`["before 5am on monday"]`. If you want it more frequently, then update the
+`schedule` field inside the `lockFileMaintenance` object.
 
 ### Wait until tests have passed before creating the PR
 
-Set configuration option `prCreation` to `"status-success"`. Failing branches will never get a Pull Request created until they eventually pass.
+Set configuration option `prCreation` to `"status-success"`. Failing branches
+will never get a Pull Request created until they eventually pass.
 
 ### Wait until tests have passed before creating a PR, but create the PR even if they fail
 
@@ -197,7 +202,8 @@ options:
 
 ### Automatically merge passing Pull Requests
 
-Set configuration option `autoMerge` to `true`. Nest it inside config objects `patch` or `minor` if you want it to apply to certain types only.
+Set configuration option `autoMerge` to `true`. Nest it inside config objects
+`patch` or `minor` if you want it to apply to certain types only.
 
 ### Separate patch releases from minor releases
 

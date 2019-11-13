@@ -26,8 +26,10 @@ Maven
 
 As far as I know, there is 2 package files:
 
-- One for main dependencies and some configurations (https://www.scala-sbt.org/1.0/docs/Basic-Def.html)
-- One for plugin dependencies and plugin configurations (https://www.scala-sbt.org/1.0/docs/Plugins.html)
+- One for main dependencies and some configurations
+  (https://www.scala-sbt.org/1.0/docs/Basic-Def.html)
+- One for plugin dependencies and plugin configurations
+  (https://www.scala-sbt.org/1.0/docs/Plugins.html)
 
 ---
 
@@ -69,17 +71,24 @@ Scala syntax
 
 #### How do you suggest parsing the file? Using an off-the-shelf parser, using regex, or can it be custom-parsed line by line?
 
-I think reading the files with Scala would be the easier. Due to the fact that the files are plain Scala code, the
-dependencies can be declared in multiple ways.
+I think reading the files with Scala would be the easier. Due to the fact that
+the files are plain Scala code, the dependencies can be declared in multiple
+ways.
 
-But, I guess there is two most commonly used way to declare dependencies and using regex could work for these formats.
+But, I guess there is two most commonly used way to declare dependencies and
+using regex could work for these formats.
 
-Another option might be to use ScalaJS. I don't know it but it has same syntax as Scala and can be read/used within Javascript code.
+Another option might be to use ScalaJS. I don't know it but it has same syntax
+as Scala and can be read/used within Javascript code.
 
-If we can use Scala or ScalaJS, the idea would be to execute the `build.sbt` or `plugins.sbt` file and work on the `libraryDependencies` or `dependencyOverrides` variables.
+If we can use Scala or ScalaJS, the idea would be to execute the `build.sbt` or
+`plugins.sbt` file and work on the `libraryDependencies` or
+`dependencyOverrides` variables.
 
-_Update (thanks to @ChristianMurphy)_: https://github.com/scalameta/scalameta running on https://www.scala-js.org could be a way to parse Scala without depending on a JDK.
-E.G. https://astexplorer.net/#/gist/027dce11e6927b4ad39ea097ce6289b9/ea4d1048f32063a71d727d01178ae6d01087a62f
+_Update (thanks to @ChristianMurphy)_: https://github.com/scalameta/scalameta
+running on https://www.scala-js.org could be a way to parse Scala without
+depending on a JDK. E.G.
+https://astexplorer.net/#/gist/027dce11e6927b4ad39ea097ce6289b9/ea4d1048f32063a71d727d01178ae6d01087a62f
 
 ---
 
@@ -87,7 +96,8 @@ E.G. https://astexplorer.net/#/gist/027dce11e6927b4ad39ea097ce6289b9/ea4d1048f32
 
 Dependencies can have a "scope" like `Test` or `Provided`.
 
-Renovate shouldn't care of scopes: they should be kept as is but they don't have any impact on the "new dependency resolution".
+Renovate shouldn't care of scopes: they should be kept as is but they don't have
+any impact on the "new dependency resolution".
 
 ---
 
@@ -138,9 +148,15 @@ dependencyOverrides ++= Seq(
 )
 ```
 
-There is two variables to look for `libraryDependencies` and `dependencyOverrides` (https://www.scala-sbt.org/1.x/docs/Library-Management.html#Overriding+a+version).
+There is two variables to look for `libraryDependencies` and
+`dependencyOverrides`
+(https://www.scala-sbt.org/1.x/docs/Library-Management.html#Overriding+a+version).
 
-`dependencyOverrides` behaves like "Dependency Management" in Maven: if two dependencies declared in `libraryDependencies` depends on the same library (let's say 'C') but with different version, `dependencyOverrides` is a way to force a specific version of 'C' instead of letting sbt choose (it would choose the highest).
+`dependencyOverrides` behaves like "Dependency Management" in Maven: if two
+dependencies declared in `libraryDependencies` depends on the same library
+(let's say 'C') but with different version, `dependencyOverrides` is a way to
+force a specific version of 'C' instead of letting sbt choose (it would choose
+the highest).
 
 More custom syntaxes with plain Scala code:
 
@@ -153,7 +169,8 @@ val myDependency: ModuleID = myDependencyGroupId %% myDependencyArtifactId % myD
 libraryDependencies += myDependency
 ```
 
-You could imagine some `if` statements as well as any other Scala syntax but I think it's pretty rare.
+You could imagine some `if` statements as well as any other Scala syntax but I
+think it's pretty rare.
 
 ##### plugins.sbt
 
@@ -189,7 +206,8 @@ Ivy (https://ant.apache.org/ivy/history/2.3.0/ivyfile/dependency.html#revision).
 
 #### Does this versioning scheme support range constraints, e.g. `^1.0.0` or `1.x`?
 
-Yes. With syntax like `[1.0,2.0]`. See https://ant.apache.org/ivy/history/2.3.0/ivyfile/dependency.html#revision.
+Yes. With syntax like `[1.0,2.0]`. See
+https://ant.apache.org/ivy/history/2.3.0/ivyfile/dependency.html#revision.
 
 ---
 
@@ -213,15 +231,18 @@ It could leverage the maven datasource.
 
 #### Will users need the capability to specify a custom host/registry to look up? Can it be found within the package files, or within other files inside the repository, or would it require Renovate configuration?
 
-Yes. Custom repositories can be defined with `resolvers` (https://www.scala-sbt.org/1.0/docs/Resolvers.html).
+Yes. Custom repositories can be defined with `resolvers`
+(https://www.scala-sbt.org/1.0/docs/Resolvers.html).
 
-Resolvers can be defined within the package files and/or in other files outside the project. Thus, a Renovate configuration would be better and easier.
+Resolvers can be defined within the package files and/or in other files outside
+the project. Thus, a Renovate configuration would be better and easier.
 
 ---
 
 #### Do the package files contain any "constraints" on the parent language (e.g. supports only v3.x of Python) or platform (Linux, Windows, etc) that should be used in the lookup procedure?
 
-Yes. It's possible to specify the Scala language version to use. This should be used in the lookup procedure.
+Yes. It's possible to specify the Scala language version to use. This should be
+used in the lookup procedure.
 
 ```scala
 // In build.sbt
@@ -252,7 +273,9 @@ N/A.
 
 sbt has a local cache in the `~/.ivy` folder.
 
-Some configuration are possible (https://www.scala-sbt.org/1.0/docs/Cached-Resolution.html) but I think cache can be ignored for RenovateBot purpose.
+Some configuration are possible
+(https://www.scala-sbt.org/1.0/docs/Cached-Resolution.html) but I think cache
+can be ignored for RenovateBot purpose.
 
 ---
 
@@ -264,5 +287,6 @@ N/A.
 
 #### Is there anything else to know about this package manager?
 
-It isn't supporting Scala version inference well (`%%` operator), just searching for package like `<artifactId>_<scalaVersion>` without any additional resolving.
+It isn't supporting Scala version inference well (`%%` operator), just searching
+for package like `<artifactId>_<scalaVersion>` without any additional resolving.
 In case of problems, please use explicit versions with `%` operator.
