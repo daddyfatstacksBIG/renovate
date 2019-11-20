@@ -73,7 +73,14 @@
     "logLevel": {
       "description": "Logging level",
       "type": "string",
-      "enum": ["fatal", "error", "warn", "info", "debug", "trace"],
+      "enum": [
+        "fatal",
+        "error",
+        "warn",
+        "info",
+        "debug",
+        "trace"
+      ],
       "default": "info"
     },
     "logFile": {
@@ -179,7 +186,13 @@
     "platform": {
       "description": "Platform type of repository",
       "type": "string",
-      "enum": ["azure", "bitbucket", "bitbucket-server", "github", "gitlab"],
+      "enum": [
+        "azure",
+        "bitbucket",
+        "bitbucket-server",
+        "github",
+        "gitlab"
+      ],
       "default": "github"
     },
     "endpoint": {
@@ -274,7 +287,10 @@
       "items": {
         "type": "string"
       },
-      "default": ["**/node_modules/**", "**/bower_components/**"]
+      "default": [
+        "**/node_modules/**",
+        "**/bower_components/**"
+      ]
     },
     "excludeCommitPaths": {
       "description": "A file that matches any of these glob patterns will not be committed, even if it has been updated.",
@@ -495,7 +511,14 @@
     "rangeStrategy": {
       "description": "Policy for how to modify/update existing ranges.",
       "type": "string",
-      "enum": ["auto", "pin", "bump", "replace", "widen", "update-lockfile"],
+      "enum": [
+        "auto",
+        "pin",
+        "bump",
+        "replace",
+        "widen",
+        "update-lockfile"
+      ],
       "default": "replace"
     },
     "branchPrefix": {
@@ -506,7 +529,11 @@
     "bumpVersion": {
       "description": "Bump the version in the package.json being updated",
       "type": "string",
-      "enum": ["major", "minor", "patch"]
+      "enum": [
+        "major",
+        "minor",
+        "patch"
+      ]
     },
     "major": {
       "description": "Configuration to apply when an update type is major",
@@ -611,7 +638,12 @@
     "prCreation": {
       "description": "When to create the PR for a branch.",
       "type": "string",
-      "enum": ["immediate", "not-pending", "status-success", "approval"],
+      "enum": [
+        "immediate",
+        "not-pending",
+        "status-success",
+        "approval"
+      ],
       "default": "immediate"
     },
     "prNotPendingHours": {
@@ -647,7 +679,11 @@
     "automergeType": {
       "description": "How to automerge, if enabled.",
       "type": "string",
-      "enum": ["branch", "pr", "pr-comment"],
+      "enum": [
+        "branch",
+        "pr",
+        "pr-comment"
+      ],
       "default": "pr"
     },
     "automergeComment": {
@@ -747,7 +783,9 @@
         "commitMessageAction": "Lock file maintenance",
         "commitMessageTopic": null,
         "commitMessageExtra": null,
-        "schedule": ["before 5am on monday"],
+        "schedule": [
+          "before 5am on monday"
+        ],
         "groupName": null,
         "prBodyDefinitions": {
           "Change": "All locks refreshed"
@@ -833,7 +871,9 @@
       "description": "Configuration object for npm package.json renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)package.json$"],
+        "fileMatch": [
+          "(^|/)package.json$"
+        ],
         "rollbackPrs": true,
         "versionScheme": "npm",
         "prBodyDefinitions": {
@@ -846,7 +886,9 @@
       "description": "Configuration object for meteor package.js renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)package.js$"]
+        "fileMatch": [
+          "(^|/)package.js$"
+        ]
       },
       "$ref": "#"
     },
@@ -854,7 +896,10 @@
       "description": "Configuration object for bazel WORKSPACE renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)WORKSPACE$", "\\.bzl$"]
+        "fileMatch": [
+          "(^|/)WORKSPACE$",
+          "\\.bzl$"
+        ]
       },
       "$ref": "#"
     },
@@ -862,7 +907,10 @@
       "description": "Configuration object for buildkite pipeline renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["buildkite\\.ya?ml", "\\.buildkite/.+\\.ya?ml$"],
+        "fileMatch": [
+          "buildkite\\.ya?ml",
+          "\\.buildkite/.+\\.ya?ml$"
+        ],
         "commitMessageTopic": "buildkite plugin {{depName}}",
         "commitMessageExtra": "to {{#if isMajor}}v{{{newMajor}}}{{else}}{{{newValue}}}{{/if}}",
         "managerBranchPrefix": "buildkite-"
@@ -881,7 +929,9 @@
       "description": "Configuration object for Go modules renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)go.mod$"]
+        "fileMatch": [
+          "(^|/)go.mod$"
+        ]
       },
       "$ref": "#"
     },
@@ -900,7 +950,9 @@
       "description": "Configuration object for bundler Gemfiles",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)Gemfile$"],
+        "fileMatch": [
+          "(^|/)Gemfile$"
+        ],
         "versionScheme": "ruby"
       },
       "$ref": "#"
@@ -909,7 +961,9 @@
       "description": "Configuration object for .ruby-version updating",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)\\.ruby-version$"],
+        "fileMatch": [
+          "(^|/)\\.ruby-version$"
+        ],
         "versionScheme": "ruby"
       },
       "$ref": "#"
@@ -919,7 +973,9 @@
       "type": "object",
       "default": {
         "commitMessageTopic": "Terraform module {{depNameShort}}",
-        "fileMatch": ["\\.tf$"],
+        "fileMatch": [
+          "\\.tf$"
+        ],
         "versionScheme": "hashicorp"
       },
       "$ref": "#"
@@ -928,7 +984,9 @@
       "description": "Configuration object for Mix module renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)mix\\.exs$"],
+        "fileMatch": [
+          "(^|/)mix\\.exs$"
+        ],
         "versionScheme": "hex"
       },
       "$ref": "#"
@@ -945,7 +1003,9 @@
       "default": {
         "commitMessageTopic": "Rust crate {{depName}}",
         "managerBranchPrefix": "rust-",
-        "fileMatch": ["(^|/)Cargo.toml$"],
+        "fileMatch": [
+          "(^|/)Cargo.toml$"
+        ],
         "versionScheme": "cargo",
         "rangeStrategy": "bump"
       },
@@ -973,7 +1033,9 @@
       "description": "Configuration object for .travis.yml node version renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["^.travis.yml$"],
+        "fileMatch": [
+          "^.travis.yml$"
+        ],
         "versionScheme": "node"
       },
       "$ref": "#"
@@ -982,7 +1044,9 @@
       "description": "Configuration object for .nvmrc files",
       "type": "object",
       "default": {
-        "fileMatch": ["^.nvmrc$"],
+        "fileMatch": [
+          "^.nvmrc$"
+        ],
         "versionScheme": "node"
       },
       "$ref": "#"
@@ -991,7 +1055,9 @@
       "description": "Configuration object for when renovating Dart pubspec files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)pubspec\\.ya?ml$"],
+        "fileMatch": [
+          "(^|/)pubspec\\.ya?ml$"
+        ],
         "versionScheme": "npm"
       },
       "$ref": "#"
@@ -1034,7 +1100,9 @@
       "description": "Configuration object for Docker Compose renovation. Also inherits settings from `docker` object.",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)docker-compose[^/]*\\.ya?ml$"]
+        "fileMatch": [
+          "(^|/)docker-compose[^/]*\\.ya?ml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1042,7 +1110,10 @@
       "description": "Configuration object for Dockerfile renovation",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"]
+        "fileMatch": [
+          "(^|/)Dockerfile$",
+          "(^|/)Dockerfile\\.[^/]*$"
+        ]
       },
       "$ref": "#"
     },
@@ -1059,7 +1130,9 @@
       "type": "object",
       "default": {
         "commitMessageTopic": "helm chart {{depName}}",
-        "fileMatch": ["(^|/)requirements.yaml$"]
+        "fileMatch": [
+          "(^|/)requirements.yaml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1067,7 +1140,9 @@
       "description": "Configuration object for CircleCI yml renovation. Also inherits settings from `docker` object.",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/).circleci/config.yml$"]
+        "fileMatch": [
+          "(^|/).circleci/config.yml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1075,7 +1150,9 @@
       "description": "Configuration object for DroneCI yml renovation. Also inherits settings from `docker` object.",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/).drone.yml$"]
+        "fileMatch": [
+          "(^|/).drone.yml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1083,7 +1160,9 @@
       "description": "Configuration object for Ansible yaml renovation. Also inherits settings from `docker` object.",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)tasks/[^/]+\\.ya?ml$"]
+        "fileMatch": [
+          "(^|/)tasks/[^/]+\\.ya?ml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1103,7 +1182,9 @@
       "description": "Configuration object for composer.json files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)([\\w-]*)composer.json$"],
+        "fileMatch": [
+          "(^|/)([\\w-]*)composer.json$"
+        ],
         "versionScheme": "composer"
       },
       "$ref": "#"
@@ -1118,7 +1199,9 @@
       "description": "Configuration object for requirements.txt files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)([\\w-]*)requirements.(txt|pip)$"]
+        "fileMatch": [
+          "(^|/)([\\w-]*)requirements.(txt|pip)$"
+        ]
       },
       "$ref": "#"
     },
@@ -1126,7 +1209,9 @@
       "description": "Configuration object for setup.py files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)setup.py$"]
+        "fileMatch": [
+          "(^|/)setup.py$"
+        ]
       },
       "$ref": "#"
     },
@@ -1134,7 +1219,9 @@
       "description": "Configuration object for Pipfile files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)Pipfile$"]
+        "fileMatch": [
+          "(^|/)Pipfile$"
+        ]
       },
       "$ref": "#"
     },
@@ -1143,7 +1230,9 @@
       "type": "object",
       "default": {
         "versionScheme": "poetry",
-        "fileMatch": ["(^|/)pyproject\\.toml$"]
+        "fileMatch": [
+          "(^|/)pyproject\\.toml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1159,7 +1248,9 @@
       "description": "Configuration object for *.sbt files",
       "type": "object",
       "default": {
-        "fileMatch": ["\\.sbt$"],
+        "fileMatch": [
+          "\\.sbt$"
+        ],
         "timeout": 300,
         "versionScheme": "ivy"
       },
@@ -1169,7 +1260,9 @@
       "description": "Configuration object for renovating Clojure leiningen projects",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)project\\.clj$"],
+        "fileMatch": [
+          "(^|/)project\\.clj$"
+        ],
         "versionScheme": "maven"
       },
       "$ref": "#"
@@ -1178,7 +1271,9 @@
       "description": "Configuration object for renovating Clojure CLI-based projects (deps.edn)",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)deps\\.edn$"],
+        "fileMatch": [
+          "(^|/)deps\\.edn$"
+        ],
         "versionScheme": "maven"
       },
       "$ref": "#"
@@ -1199,7 +1294,10 @@
       "description": "Configuration object for build.gradle files",
       "type": "object",
       "default": {
-        "fileMatch": ["\\.gradle(\\.kts)?$", "(^|/)gradle.properties$"],
+        "fileMatch": [
+          "\\.gradle(\\.kts)?$",
+          "(^|/)gradle.properties$"
+        ],
         "timeout": 600,
         "versionScheme": "maven"
       },
@@ -1209,7 +1307,9 @@
       "description": "Configuration object for gradle-wrapper.properties files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)gradle/wrapper/gradle-wrapper.properties$"]
+        "fileMatch": [
+          "(^|/)gradle/wrapper/gradle-wrapper.properties$"
+        ]
       },
       "$ref": "#"
     },
@@ -1217,7 +1317,10 @@
       "description": "Configuration object for when renovating Maven pom.xml files",
       "type": "object",
       "default": {
-        "fileMatch": ["\\.pom\\.xml$", "(^|/)pom\\.xml$"],
+        "fileMatch": [
+          "\\.pom\\.xml$",
+          "(^|/)pom\\.xml$"
+        ],
         "versionScheme": "maven"
       },
       "$ref": "#"
@@ -1226,7 +1329,9 @@
       "description": "Configuration object for GitLab CI yml renovation. Also inherits settings from `docker` object.",
       "type": "object",
       "default": {
-        "fileMatch": ["^\\.gitlab-ci\\.yml$"]
+        "fileMatch": [
+          "^\\.gitlab-ci\\.yml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1234,7 +1339,9 @@
       "description": "Configuration object for GitLab CI yml renovation for include.",
       "type": "object",
       "default": {
-        "fileMatch": ["^\\.gitlab-ci\\.yml$"]
+        "fileMatch": [
+          "^\\.gitlab-ci\\.yml$"
+        ]
       },
       "$ref": "#"
     },
@@ -1248,7 +1355,9 @@
       "description": "Configuration object for C#/Nuget",
       "type": "object",
       "default": {
-        "fileMatch": ["\\.csproj$"]
+        "fileMatch": [
+          "\\.csproj$"
+        ]
       },
       "$ref": "#"
     },
@@ -1258,7 +1367,9 @@
       "default": {
         "commitMessageTopic": "Homebrew Formula {{depName}}",
         "managerBranchPrefix": "homebrew-",
-        "fileMatch": ["^Formula/[^/]+[.]rb$"]
+        "fileMatch": [
+          "^Formula/[^/]+[.]rb$"
+        ]
       },
       "$ref": "#"
     },
@@ -1321,7 +1432,12 @@
     "prBodyColumns": {
       "description": "List of columns to use in PR bodies",
       "type": "array",
-      "default": ["Package", "Type", "Update", "Change"]
+      "default": [
+        "Package",
+        "Type",
+        "Update",
+        "Change"
+      ]
     },
     "prBodyNotes": {
       "description": "List of additional notes/templates to be included in the Pull Request bodies.",
@@ -1334,13 +1450,17 @@
     "suppressNotifications": {
       "description": "Options to suppress various types of warnings and other notifications",
       "type": "array",
-      "default": ["deprecationWarningIssues"]
+      "default": [
+        "deprecationWarningIssues"
+      ]
     },
     "swift": {
       "description": "Configuration for Package.swift files",
       "type": "object",
       "default": {
-        "fileMatch": ["(^|/)Package\\.swift"],
+        "fileMatch": [
+          "(^|/)Package\\.swift"
+        ],
         "versionScheme": "swift",
         "rangeStrategy": "bump"
       },
