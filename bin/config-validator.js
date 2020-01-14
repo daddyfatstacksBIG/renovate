@@ -2,11 +2,11 @@
 
 const fs = require('fs-extra');
 const os = require('os');
-const {validateConfig} = require('../dist/config/validation');
-const {massageConfig} = require('../dist/config/massage');
-const {getConfig} = require('../dist/config/file');
+const { validateConfig } = require('../dist/config/validation');
+const { massageConfig } = require('../dist/config/massage');
+const { getConfig } = require('../dist/config/file');
 const cache = require('../dist/workers/global/cache');
-const {configFileNames} = require('../dist/config/app-strings');
+const { configFileNames } = require('../dist/config/app-strings');
 
 /* eslint-disable no-console */
 
@@ -16,12 +16,14 @@ async function validate(desc, config, isPreset = false) {
   const res = await validateConfig(massageConfig(config), isPreset);
   if (res.errors.length) {
     console.log(
-        `${desc} contains errors:\n\n${JSON.stringify(res.errors, null, 2)}`);
+      `${desc} contains errors:\n\n${JSON.stringify(res.errors, null, 2)}`
+    );
     returnVal = 1;
   }
   if (res.warnings.length) {
-    console.log(`${desc} contains warnings:\n\n${
-        JSON.stringify(res.warnings, null, 2)}`);
+    console.log(
+      `${desc} contains warnings:\n\n${JSON.stringify(res.warnings, null, 2)}`
+    );
     returnVal = 1;
   }
 }
