@@ -1,17 +1,19 @@
 const fs = require('fs');
 const upath = require('upath');
-const { getOptions } = require('../lib/config/definitions');
+const {getOptions} = require('../lib/config/definitions');
 
 const schema = {
-  title: 'JSON schema for Renovate config files (https://renovatebot.com/)',
-  $schema: 'http://json-schema.org/draft-04/schema#',
-  type: 'object',
-  properties: {},
+  title : 'JSON schema for Renovate config files (https://renovatebot.com/)',
+  $schema : 'http://json-schema.org/draft-04/schema#',
+  type : 'object',
+  properties : {},
 };
 const options = getOptions();
 options.sort((a, b) => {
-  if (a.name < b.name) return -1;
-  if (a.name > b.name) return 1;
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
   return 0;
 });
 const properties = {};
@@ -25,7 +27,7 @@ function createSingleConfig(option) {
   if (temp.type === 'array') {
     if (option.subType) {
       temp.items = {
-        type: option.subType,
+        type : option.subType,
       };
       if (option.format) {
         temp.items.format = option.format;
@@ -66,10 +68,10 @@ function addChildrenArrayInParents() {
   for (const option of options) {
     if (option.parent) {
       properties[option.parent].items = {
-        allOf: [
+        allOf : [
           {
-            type: 'object',
-            properties: {},
+            type : 'object',
+            properties : {},
           },
         ],
       };
@@ -80,9 +82,8 @@ function addChildrenArrayInParents() {
 function createSchemaForChildConfigs() {
   for (const option of options) {
     if (option.parent) {
-      properties[option.parent].items.allOf[0].properties[
-        option.name
-      ] = createSingleConfig(option);
+      properties[option.parent].items.allOf[0].properties[option.name] =
+          createSingleConfig(option);
     }
   }
 }
@@ -92,11 +93,8 @@ function generateSchema() {
   addChildrenArrayInParents();
   createSchemaForChildConfigs();
   schema.properties = properties;
-  fs.writeFileSync(
-    upath.join(__dirname, '../renovate-schema.json'),
-    JSON.stringify(schema, null, 2),
-    'utf-8'
-  );
+  fs.writeFileSync(upath.join(__dirname, '../renovate-schema.json'),
+                   JSON.stringify(schema, null, 2), 'utf-8');
 }
 
 generateSchema();
