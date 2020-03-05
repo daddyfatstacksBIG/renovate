@@ -113,7 +113,9 @@
             "title": "feat(azure): abandon pr after delete branch",
             "mergeable": "MERGEABLE",
             "mergeStateStatus": "BEHIND",
-            "reviews": { "nodes": [ ] },
+            "reviews": {
+              "nodes": []
+            },
             "commits": {
               "nodes": [
                 {
