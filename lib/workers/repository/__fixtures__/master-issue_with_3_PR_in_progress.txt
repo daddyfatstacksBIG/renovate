@@ -8,4 +8,3 @@ These updates have all been created already. Click a checkbox below to force a r
  - [ ] <!-- rebase-branch=branchName2 -->pr2 (`dep2`, `dep3`)
  - [ ] <!-- rebase-branch=branchName3 -->[pr3](../pull/3)
  - [ ] <!-- rebase-all-open-prs -->**Check this option to rebase all the above open PRs at once**
-
