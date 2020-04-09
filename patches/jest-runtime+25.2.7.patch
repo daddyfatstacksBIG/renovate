@@ -5,7 +5,7 @@ index 9fd9eed..0345598 100644
 @@ -1102,7 +1102,29 @@ class Runtime {
        return this._getMockedNativeModule();
      }
- 
+
 -    return require(moduleName);
 +    if (!this._coreModulesProxyCache) {
 +      this._coreModulesProxyCache = Object.create(null);
@@ -31,7 +31,7 @@ index 9fd9eed..0345598 100644
 +
 +    return this._coreModulesProxyCache[moduleName] = new Proxy(mod, {set});
    }
- 
+
    _getMockedNativeModule() {
 diff --git a/node_modules/jest-runtime/build/index.js.orig b/node_modules/jest-runtime/build/index.js.orig
 new file mode 100644
@@ -1623,7 +1623,7 @@ index 0000000..16901e6
 +@@ -1072,7 +1072,30 @@ class Runtime {
 +       return this._environment.global.process;
 +     }
-+ 
++
 +-    return require(moduleName);
 ++    if (!this._coreModulesProxyCache) {
 ++      this._coreModulesProxyCache = Object.create(null);
@@ -1650,5 +1650,5 @@ index 0000000..16901e6
 ++    return this._coreModulesProxyCache[moduleName] = new Proxy(mod, {set});
 ++
 +   }
-+ 
++
 +   _generateMock(from, moduleName) {
